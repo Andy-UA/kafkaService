@@ -39,11 +39,10 @@ func convertToOutputMessage(inputMessage domain.InputMessage, destinationTopic s
 	var outputMessages = make([]domain.OutputMessage, len(inputMessage.Message.Partitions))
 
 	for i, partition := range inputMessage.Message.Partitions {
-		outputMessages[i].PayloadData.Name = partition.Name
-		outputMessages[i].PayloadData.DriveType = partition.DriveType
-		outputMessages[i].PayloadData.UsedSpaceBytes = partition.Metric.UsedSpaceBytes
-		outputMessages[i].PayloadData.TotalSpaceBytes = partition.Metric.TotalSpaceBytes
-		outputMessages[i].PayloadData.CreateAtTimeUTC = inputMessage.Message.CreateAtTimeUTC
+		outputMessages[i].PayloadData = domain.Data{
+			Partition: partition,
+			CreateAtTimeUTC: inputMessage.Message.CreateAtTimeUTC,
+		}
 	}
 
 	sendMessage(outputMessages, destinationTopic)
@@ -56,7 +55,7 @@ func marshalMessage(c chan<- kafka.Message, outputMessages []domain.OutputMessag
 			fmt.Println(err)
 			return
 		}
-
+		status <- fmt.Sprintf("Message: %s", string(message))
 		c <- kafka.Message{
 			Value: message,
 		}
