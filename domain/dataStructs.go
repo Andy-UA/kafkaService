@@ -12,15 +12,24 @@ type Metric struct {
 	TotalSpaceBytes interface{} `json:"totalSpaceBytes"`
 }
 
-type Partition struct {
-	Name      string `json:"name"`
+type BasicInfo struct {
+	Name      string 	  `json:"name"`
 	DriveType interface{} `json:"driveType"`
+}
+
+type InputPartition struct {
+	BasicInfo
 	Metric `json:"metric"`
 }
 
+type OutputPartition struct {
+	BasicInfo
+	Metric
+}
+
 type Message struct {
-	CreateAtTimeUTC string      `json:"createAtTimeUTC"`
-	Partitions      []Partition `json:"partitions"`
+	CreateAtTimeUTC string      	 `json:"createAtTimeUTC"`
+	Partitions      []InputPartition `json:"partitions"`
 }
 
 type Graph struct {
@@ -28,7 +37,7 @@ type Graph struct {
 }
 
 type Data struct {
-	Partition
+	OutputPartition
 	CreateAtTimeUTC string `json:"createAtTimeUTC"`
 }
 
