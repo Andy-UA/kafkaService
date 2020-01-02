@@ -40,7 +40,10 @@ func convertToOutputMessage(inputMessage domain.InputMessage, destinationTopic s
 
 	for i, partition := range inputMessage.Message.Partitions {
 		outputMessages[i].PayloadData = domain.Data{
-			Partition: partition,
+			OutputPartition: domain.OutputPartition{
+				BasicInfo: partition.BasicInfo,
+				Metric:    partition.Metric,
+			},
 			CreateAtTimeUTC: inputMessage.Message.CreateAtTimeUTC,
 		}
 	}
