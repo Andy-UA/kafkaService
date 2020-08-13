@@ -1,0 +1,58 @@
+[
+    {
+        "inputTopic": "inputTopic",
+        "destinationTopic": "destinationTopic",
+        "graph": {
+            "Message": {
+                "createAtTimeUTC": "$createAtTimeUTC",
+                "partitions": [
+                    {
+                        "name": "$name",
+                        "driveType": "$driveType",
+                        "metric": {
+                            "usedSpaceBytes": 3,
+                            "totalSpaceBytes": "$totalSpaceBytes"
+                        }
+                    }
+                ]
+            }
+        },
+        "destinationMessage": {
+            "data": {
+                "name": "$name",
+                "driveType": "$driveType",
+                "usedSpaceBytes": "$usedSpaceBytes",
+                "totalSpaceBytes": "$totalSpaceBytes",
+                "createAtTimeUTC": "$createAtTimeUTC"
+            }
+        }
+    },
+    {
+        "inputTopic": "inputTopic2",
+        "destinationTopic": "destinationTopic2",
+        "graph": {
+            "Message": {
+                "createAtTimeUTC": "$createAtTimeUTC",
+                "partitions": [
+                    {
+                        "name": "$name",
+                        "driveType": 3,
+                        "metric": {
+                            "usedSpaceBytes": "$usedSpaceBytes",
+                            "totalSpaceBytes": "$totalSpaceBytes"
+                        }
+                    }
+                ]
+            }
+        },
+        "destinationMessage": {
+            "data": {
+                "name": "$name",
+                "driveType": "$driveType",
+                "usedSpaceBytes": "$usedSpaceBytes",
+                "totalSpaceBytes": "$totalSpaceBytes",
+                "createAtTimeUTC": "$createAtTimeUTC"
+            }
+        }
+    }
+]
